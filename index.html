@@ -28,6 +28,7 @@
                         <span class="icon left"></span>
                     </a>
                     <a class="icon more pull-right" style="margin-top: 10px;"></a>
+                    <label id="timeShow" style="color:#C0C0C0;margin-top:25px;margin-left:25px;">正在载入：</label>
                     <div class="title" style="height: 34px; width: 80px; line-height: 34px; background-color: #fff; color: green; position: static; margin-left: 52px; margin-top: 6px; font-size: 12px;">通过</div>
                 </header>
                 <nav class="bar bar-tab" style="height: 60px; line-height: 12px; box-shadow: 0px 13px 11px -13px #9a9a9a inset;;">
@@ -56,6 +57,36 @@
         <script type="text/javascript" src="js/new-function.js"></script>
         <script>
             $.init();
+            function time(){
+                //获得显示时间的div
+                t_div = document.getElementById('showtime');
+                var now=new Date()
+                //替换div内容 
+                t_div.innerHTML = "现在是"+now.getFullYear()
+                    +"年"+(now.getMonth()+1)+"月"+now.getDate()
+                    +"日"+now.getHours()+"时"+now.getMinutes()
+                    +"分"+now.getSeconds()+"秒";
+                    //等待一秒钟后调用time方法，由于settimeout在time方法内，所以可以无限调用
+                setTimeout(time,1000);
+            }
         </script>
+
+        <script>　
+            var t = null;
+            t = setTimeout(time,1000);
+            function time(){
+            clearTimeout(t);
+            dt = new Date();
+            var y = dt.getFullYear();
+            var mo = dt.getMonth()+1;
+            var d = dt.getDate();
+            var h = dt.getHours();
+            var m = dt.getMinutes();
+            var s = dt.getSeconds();
+            document.getElementById("timeShow").innerHTML= y + "年" + mo + "月" + d + "日" + h + "时" + m + "分" + s + "秒";
+            t = setTimeout(time,1000);
+            }
+        </script>
+    
     </body>
 </html>
